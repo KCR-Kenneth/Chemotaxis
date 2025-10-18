@@ -3,7 +3,7 @@ Man pac = new Man (370,30);
 Wall [] nope = new Wall [0];
 Powerup [] balls = new Powerup [0];
 int tic = 1;
-boolean wallMode = false;
+boolean wallMode = true;
 boolean powered = false;
 int poweredTimer;
 
@@ -128,6 +128,20 @@ void keyPressed() {
       pac.request = 2;
     } else if (keyCode == UP) {
       pac.request = 3;
+    } else if (keyCode == ALT) {
+      if (mouseY < 630) {
+        if (!checkDupe()){
+        Powerup [] temp = new Powerup[balls.length+1];
+        for (int i = 0; i < balls.length; i++) {
+          temp[i] = balls[i];
+        }
+        balls = new Powerup[balls.length + 1];
+        for (int i = 0; i < balls.length; i++) {
+          balls[i] = temp[i];
+        }
+        balls[balls.length-1] = new Powerup ((int)(mouseX/30)*30, (int)(mouseY/30)*30+30);
+        }
+      }
     }
   }
 }
@@ -148,24 +162,9 @@ void mouseDragged() {
 
 void mousePressed() {
   System.out.println(mouseX + ", " + mouseY);
-  if (mouseY < 630 && !wallMode) {
-    if (!checkDupe()){
-      Powerup [] temp = new Powerup[balls.length+1];
-      for (int i = 0; i < balls.length; i++) {
-        temp[i] = balls[i];
-      }
-      balls = new Powerup[balls.length + 1];
-      for (int i = 0; i < balls.length; i++) {
-        balls[i] = temp[i];
-      }
-      balls[balls.length-1] = new Powerup ((int)(mouseX/30)*30, (int)(mouseY/30)*30+30);
-    }
-  } else {
-    if (mouseX > 85 && mouseX < 235) {
+  if (mouseX > 85 && mouseX < 235) {
       wallMode = true;
-    } else if (mouseX > 285 && mouseX < 435) {
-      wallMode = false;
-    } else if (mouseX > 485 && mouseX < 635 && boo.length == 0) {
+  } else if (mouseX > 485 && mouseX < 635 && boo.length == 0) {
       round++;
       boo = new Ghost [10*round];
       for (int i = 0; i < boo.length; i++) {
@@ -179,8 +178,8 @@ void mousePressed() {
       wallMode = true;
       powered = false;
       poweredTimer = 0;
-    }
   }
+  
 }
 
 class Ghost {
@@ -400,9 +399,10 @@ void decorate() {
   
   textAlign(CENTER);
   fill(150,150,0);
+  textSize(15);
+  text("Powerups (PRESS ALT)", 360, 690);
   textSize(30);
   text("Walls", 160, 690);
-  text("Powerups", 360, 690);
   text("NEXT", 560, 690);
   
   if (lost) {
