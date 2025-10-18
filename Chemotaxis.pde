@@ -403,9 +403,9 @@ void decorate() {
   fill(150,150,0);
   textSize(15);
   text("Powerups (PRESS ALT)", 360, 690);
+  text("NEXT (PRESS CTRL)", 560, 690);
   textSize(30);
   text("Walls", 160, 690);
-  text("NEXT", 560, 690);
   
   if (lost) {
     textSize(60);
