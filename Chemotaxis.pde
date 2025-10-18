@@ -142,6 +142,22 @@ void keyPressed() {
         balls[balls.length-1] = new Powerup ((int)(mouseX/30)*30, (int)(mouseY/30)*30+30);
         }
       }
+    } else if (keyCode == CONTROL) {
+      if (boo.length == 0) {
+      round++;
+      boo = new Ghost [10*round];
+      for (int i = 0; i < boo.length; i++) {
+        int c = color ((int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
+        boo[i] = new Ghost (370,600,c);
+      }
+      pac = new Man (370,30);
+      nope = new Wall [0];
+      balls = new Powerup [0];
+      tic = 1;
+      wallMode = true;
+      powered = false;
+      poweredTimer = 0;
+      }
     }
   }
 }
@@ -164,20 +180,6 @@ void mousePressed() {
   System.out.println(mouseX + ", " + mouseY);
   if (mouseX > 85 && mouseX < 235) {
       wallMode = true;
-  } else if (mouseX > 485 && mouseX < 635 && boo.length == 0) {
-      round++;
-      boo = new Ghost [10*round];
-      for (int i = 0; i < boo.length; i++) {
-        int c = color ((int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
-        boo[i] = new Ghost (370,600,c);
-      }
-      pac = new Man (370,30);
-      nope = new Wall [0];
-      balls = new Powerup [0];
-      tic = 1;
-      wallMode = true;
-      powered = false;
-      poweredTimer = 0;
   }
   
 }
