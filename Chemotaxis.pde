@@ -3,7 +3,7 @@ Man pac = new Man (370,30);
 Wall [] nope = new Wall [0];
 Powerup [] balls = new Powerup [0];
 int tic = 1;
-boolean wallMode = true;
+boolean wallMode = false;
 boolean powered = false;
 int poweredTimer;
 
